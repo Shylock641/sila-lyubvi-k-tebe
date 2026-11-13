@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100817">
+<title>Сила любви к тебе ❤️</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  overflow: hidden;
+  background: #090610;
+  color: white;
+  font-family: Georgia, serif;
+}
+
+.space {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at center,
+    #321337 0%, #170d29 50%, #080611 100%);
+}
+
+/* ТУМАННОСТЬ */
+
+.nebula {
+  position: absolute;
+  width: 90vw;
+  height: 90vw;
+  max-width: 850px;
+  max-height: 850px;
+  border-radius: 50%;
+  filter: blur(65px);
+  opacity: .5;
+  animation: nebulaMove 25s ease-in-out infinite alternate;
+}
+
+.n1 {
+  top: -30%;
+  left: -25%;
+  background: radial-gradient(circle,
+    #ff4fa8, #a52caa 40%, transparent 70%);
+}
+
+.n2 {
+  right: -30%;
+  bottom: -35%;
+  background: radial-gradient(circle,
+    #c52b9c, #6525a0 40%, transparent 70%);
+  animation-delay: -10s;
+  animation-duration: 32s;
+}
+
+.n3 {
+  top: 25%;
+  left: 30%;
+  background: radial-gradient(circle,
+    #ff9ad9, #8e39b7 35%, transparent 70%);
+  opacity: .22;
+  animation-delay: -15s;
+  animation-duration: 35s;
+}
+
+@keyframes nebulaMove {
+  from {
+    transform: translate(-5%, -4%) scale(.9);
+  }
+  to {
+    transform: translate(8%, 7%) scale(1.2);
+  }
+}
+
+/* ЗВЁЗДЫ */
+
+#stars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* КОМЕТЫ */
+
+.comet {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  animation: cometFly 6s linear forwards;
+  pointer-events: none;
+}
+
+.comet-head {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 10px 4px #ff8cdb;
+}
+
+.comet-tail {
+  position: absolute;
+  width: 145px;
+  height: 3px;
+  right: 5px;
+  top: 3px;
+  background: linear-gradient(
+    to left,
+    white,
+    #ff83d5,
+    #a849d4,
+    transparent
+  );
+  box-shadow: 0 0 12px #e879ff;
+}
+
+.comet-message {
+  position: absolute;
+  right: -10px;
+  bottom: 24px;
+  width: max-content;
+  max-width: 220px;
+  white-space: normal;
+  text-align: right;
+  font-size: 13px;
+  color: #ffe2f7;
+  text-shadow: 0 0 10px #ff54c8;
+}
+
+@keyframes cometFly {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  85% { opacity: 1; }
+  100% {
+    transform: translate(var(--dx), var(--dy));
+    opacity: 0;
+  }
+}
+
+/* ЗАГОЛОВОК */
+
+.intro {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 25px;
+  pointer-events: none;
+}
+
+h1 {
+  font-size: clamp(34px, 8vw, 58px);
+  font-weight: normal;
+  color: #ffe0fa;
+  text-shadow:
+    0 0 15px #ff5bcf,
+    0 0 40px #a43bb9;
+  animation: glow 4s ease-in-out infinite alternate;
+}
+
+.subtitle {
+  margin-top: 22px;
+  max-width: 340px;
+  font-size: 17px;
+  line-height: 1.8;
+  color: #e9c8f3;
+}
+
+@keyframes glow {
+  from { opacity: .8; }
+  to { opacity: 1; }
+}
+
+/* УМЕНЬШЕНИЕ АНИМАЦИИ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="space">
+  <div class="nebula n1"></div>
+  <div class="nebula n2"></div>
+  <div class="nebula n3"></div>
+
+  <canvas id="stars"></canvas>
+  <div id="comets"></div>
+</div>
+
+<main class="intro">
+  <h1>Сила любви к тебе</h1>
+
+  <p class="subtitle">
+    Среди бесконечности звёзд<br>
+    есть только одна,<br>
+    которая освещает мой мир.<br>
+    ❤️
+  </p>
+</main>
+
+<script>
+
+/* СОЗДАНИЕ ЗВЁЗДНОГО НЕБА */
+
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+const reducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+let stars = [];
+
+function resize() {
+  const dpr = Math.min(
+    window.devicePixelRatio || 1, 1.5
+  );
+
+  canvas.width = innerWidth * dpr;
+  canvas.height = innerHeight * dpr;
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  stars = Array.from(
+    { length: Math.min(160, Math.floor(innerWidth / 3)) },
+    () => ({
+      x: Math.random() * innerWidth,
+      y: Math.random() * innerHeight,
+      size: Math.random() * 1.5 + .3,
+      phase: Math.random() * Math.PI * 2
+    })
+  );
+
+  if (reducedMotion) drawStars(0);
+}
+
+function drawStars(time = 0) {
+  ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+  stars.forEach(star => {
+    const opacity = .4 +
+      Math.sin(time * .001 + star.phase) * .3;
+
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+
+    ctx.fillStyle =
+      `rgba(255,225,255,${opacity})`;
+
+    ctx.fill();
+  });
+
+  if (!reducedMotion) {
+    requestAnimationFrame(drawStars);
+  }
+}
+
+resize();
+drawStars();
+
+window.addEventListener("resize", resize);
+
+/* КОСМИЧЕСКИЕ ПОСЛАНИЯ */
+
+const messages = [
+  "Ты моё самое красивое совпадение ❤️",
+  "Даже среди бесконечности я выбрал бы тебя",
+  "Ты делаешь мой мир светлее ✨",
+  "Моя любимая звезда 🌙",
+  "Расстояние не меняет моих чувств",
+  "Ты особенная часть моей вселенной",
+  "Моё сердце всегда находит дорогу к тебе"
+];
+
+function createComet() {
+  if (reducedMotion || document.hidden) return;
+
+  const comet = document.createElement("div");
+  comet.className = "comet";
+
+  const head = document.createElement("div");
+  head.className = "comet-head";
+
+  const tail = document.createElement("div");
+  tail.className = "comet-tail";
+
+  const message = document.createElement("div");
+  message.className = "comet-message";
+
+  message.textContent =
+    messages[Math.floor(Math.random() * messages.length)];
+
+  comet.append(tail, head, message);
+
+  const startX = Math.random() * innerWidth * .5;
+  const startY = Math.random() * innerHeight * .7;
+
+  comet.style.left = startX + "px";
+  comet.style.top = startY + "px";
+
+  comet.style.setProperty("--dx", (innerWidth + 300) + "px");
+
+  comet.style.setProperty(
+    "--dy",
+    ((Math.random() - .5) * innerHeight * .5) + "px"
+  );
+
+  document.getElementById("comets").appendChild(comet);
+
+  setTimeout(() => comet.remove(), 6100);
+}
+
+if (!reducedMotion) {
+  setTimeout(createComet, 2000);
+
+  setInterval(() => {
+    if (!document.hidden) createComet();
+  }, 7500);
+}
+
+</script>
+</body>
+  </html>
+  
