@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#100817">
+<meta name="theme-color" content="#090611">
 <title>Сила любви к тебе ❤️</title>
 
 <style>
@@ -17,70 +17,98 @@
 body {
   min-height: 100vh;
   overflow: hidden;
-  background: #090610;
+  background: #090611;
   color: white;
   font-family: Georgia, serif;
 }
+
+/* SPACE */
 
 .space {
   position: fixed;
   inset: 0;
   overflow: hidden;
   background:
-    radial-gradient(ellipse at center,
-    #321337 0%, #170d29 50%, #080611 100%);
+    radial-gradient(ellipse at 50% 45%,
+      #30102f, #170b25 55%, #080610);
 }
 
-/* ТУМАННОСТЬ */
+/* NEBULA CLOUDS */
 
-.nebula {
+.cloud {
   position: absolute;
-  width: 90vw;
-  height: 90vw;
-  max-width: 850px;
-  max-height: 850px;
+  width: 110vw;
+  height: 110vw;
+  max-width: 1000px;
+  max-height: 1000px;
   border-radius: 50%;
-  filter: blur(65px);
-  opacity: .5;
-  animation: nebulaMove 25s ease-in-out infinite alternate;
+  filter: blur(48px);
+  will-change: transform;
+  animation: drift 28s ease-in-out infinite alternate;
 }
 
-.n1 {
+.cloud1 {
+  left: -35%;
   top: -30%;
-  left: -25%;
-  background: radial-gradient(circle,
-    #ff4fa8, #a52caa 40%, transparent 70%);
+  opacity: .65;
+  background:
+    radial-gradient(ellipse at 40% 40%,
+      #ff4d9e 0%,
+      #bd348e 22%,
+      #70277e 43%,
+      transparent 70%);
 }
 
-.n2 {
-  right: -30%;
+.cloud2 {
+  right: -45%;
   bottom: -35%;
-  background: radial-gradient(circle,
-    #c52b9c, #6525a0 40%, transparent 70%);
-  animation-delay: -10s;
-  animation-duration: 32s;
-}
-
-.n3 {
-  top: 25%;
-  left: 30%;
-  background: radial-gradient(circle,
-    #ff9ad9, #8e39b7 35%, transparent 70%);
-  opacity: .22;
-  animation-delay: -15s;
+  opacity: .55;
+  animation-delay: -12s;
   animation-duration: 35s;
+  background:
+    radial-gradient(ellipse at 50% 50%,
+      #ed65c0 0%,
+      #9838ad 30%,
+      #47236e 55%,
+      transparent 72%);
 }
 
-@keyframes nebulaMove {
+.cloud3 {
+  top: 20%;
+  left: 15%;
+  opacity: .35;
+  animation-delay: -7s;
+  animation-duration: 31s;
+  background:
+    radial-gradient(ellipse at 50% 50%,
+      #ff9bdc 0%,
+      #a64cba 30%,
+      transparent 70%);
+}
+
+.cloud4 {
+  width: 75vw;
+  height: 75vw;
+  right: 5%;
+  top: 5%;
+  opacity: .28;
+  filter: blur(60px);
+  animation-delay: -17s;
+  background:
+    radial-gradient(ellipse,
+      #e93c9b, #6730a0 40%, transparent 72%);
+}
+
+@keyframes drift {
   from {
-    transform: translate(-5%, -4%) scale(.9);
+    transform: translate(-5%, -4%) scale(.9) rotate(0deg);
   }
   to {
-    transform: translate(8%, 7%) scale(1.2);
+    transform: translate(8%, 7%) scale(1.18) rotate(12deg);
   }
 }
 
-/* ЗВЁЗДЫ */
+/* STARS AND DUST */
 
 #stars {
   position: absolute;
@@ -89,14 +117,21 @@ body {
   height: 100%;
 }
 
-/* КОМЕТЫ */
+#dust {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* COMETS */
 
 .comet {
   position: absolute;
-  width: 12px;
-  height: 12px;
-  animation: cometFly 6s linear forwards;
+  width: 10px;
+  height: 10px;
   pointer-events: none;
+  animation: fly 7s linear forwards;
+  z-index: 3;
 }
 
 .comet-head {
@@ -107,44 +142,45 @@ body {
   height: 9px;
   border-radius: 50%;
   background: white;
-  box-shadow: 0 0 10px 4px #ff8cdb;
+  box-shadow: 0 0 12px 5px #ff91db;
 }
 
 .comet-tail {
   position: absolute;
-  width: 145px;
-  height: 3px;
   right: 5px;
   top: 3px;
+  width: 150px;
+  height: 3px;
   background: linear-gradient(
     to left,
     white,
-    #ff83d5,
-    #a849d4,
+    #ff7acb,
+    #a53dcb,
     transparent
   );
-  box-shadow: 0 0 12px #e879ff;
+  box-shadow: 0 0 12px #eb8bff;
 }
 
 .comet-message {
   position: absolute;
   right: -10px;
-  bottom: 24px;
+  bottom: 25px;
   width: max-content;
-  max-width: 220px;
-  white-space: normal;
+  max-width: 210px;
   text-align: right;
-  font-size: 13px;
-  color: #ffe2f7;
-  text-shadow: 0 0 10px #ff54c8;
+  white-space: normal;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #ffe3f7;
+  text-shadow: 0 0 12px #ff5bcf;
 }
 
-@keyframes cometFly {
+@keyframes fly {
   0% {
     transform: translate(0, 0);
     opacity: 0;
   }
-  10% { opacity: 1; }
+  12% { opacity: 1; }
   85% { opacity: 1; }
   100% {
     transform: translate(var(--dx), var(--dy));
@@ -152,7 +188,7 @@ body {
   }
 }
 
-/* ЗАГОЛОВОК */
+/* MAIN TEXT */
 
 .intro {
   position: relative;
@@ -160,8 +196,8 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   text-align: center;
   padding: 25px;
   pointer-events: none;
@@ -172,17 +208,19 @@ h1 {
   font-weight: normal;
   color: #ffe0fa;
   text-shadow:
-    0 0 15px #ff5bcf,
-    0 0 40px #a43bb9;
+    0 0 15px #ff63cf,
+    0 0 35px #b33ac0,
+    0 0 65px #8b35c0;
   animation: glow 4s ease-in-out infinite alternate;
 }
 
 .subtitle {
-  margin-top: 22px;
-  max-width: 340px;
+  margin-top: 24px;
+  max-width: 350px;
   font-size: 17px;
-  line-height: 1.8;
-  color: #e9c8f3;
+  line-height: 1.9;
+  color: #f0d5f5;
+  text-shadow: 0 0 12px #b64cba;
 }
 
 @keyframes glow {
@@ -190,7 +228,13 @@ h1 {
   to { opacity: 1; }
 }
 
-/* УМЕНЬШЕНИЕ АНИМАЦИИ */
+/* MOBILE PERFORMANCE */
+
+@media (max-width: 600px) {
+  .cloud {
+    filter: blur(40px);
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -204,12 +248,17 @@ h1 {
 <body>
 
 <div class="space">
-  <div class="nebula n1"></div>
-  <div class="nebula n2"></div>
-  <div class="nebula n3"></div>
+
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="cloud cloud3"></div>
+  <div class="cloud cloud4"></div>
 
   <canvas id="stars"></canvas>
+  <canvas id="dust"></canvas>
+
   <div id="comets"></div>
+
 </div>
 
 <main class="intro">
@@ -225,54 +274,56 @@ h1 {
 
 <script>
 
-/* СОЗДАНИЕ ЗВЁЗДНОГО НЕБА */
-
-const canvas = document.getElementById("stars");
-const ctx = canvas.getContext("2d");
+/* SETTINGS */
 
 const reducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)"
 ).matches;
 
+/* STAR FIELD */
+
+const starsCanvas = document.getElementById("stars");
+const starsCtx = starsCanvas.getContext("2d");
+
 let stars = [];
 
-function resize() {
-  const dpr = Math.min(
-    window.devicePixelRatio || 1, 1.5
-  );
+function resizeCanvas(canvas, ctx) {
+  const dpr = Math.min(devicePixelRatio || 1, 1.5);
 
   canvas.width = innerWidth * dpr;
   canvas.height = innerHeight * dpr;
 
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
 
+function createStars() {
   stars = Array.from(
-    { length: Math.min(160, Math.floor(innerWidth / 3)) },
+    { length: Math.min(170, Math.floor(innerWidth / 2.5)) },
     () => ({
       x: Math.random() * innerWidth,
       y: Math.random() * innerHeight,
-      size: Math.random() * 1.5 + .3,
+      size: Math.random() * 1.7 + .3,
       phase: Math.random() * Math.PI * 2
     })
   );
-
-  if (reducedMotion) drawStars(0);
 }
 
 function drawStars(time = 0) {
-  ctx.clearRect(0, 0, innerWidth, innerHeight);
+  starsCtx.clearRect(0, 0, innerWidth, innerHeight);
 
   stars.forEach(star => {
-    const opacity = .4 +
+    const opacity = .3 +
       Math.sin(time * .001 + star.phase) * .3;
 
-    ctx.beginPath();
-    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+    starsCtx.beginPath();
+    starsCtx.arc(
+      star.x, star.y, star.size, 0, Math.PI * 2
+    );
 
-    ctx.fillStyle =
+    starsCtx.fillStyle =
       `rgba(255,225,255,${opacity})`;
 
-    ctx.fill();
+    starsCtx.fill();
   });
 
   if (!reducedMotion) {
@@ -280,12 +331,68 @@ function drawStars(time = 0) {
   }
 }
 
+/* COSMIC DUST */
+
+const dustCanvas = document.getElementById("dust");
+const dustCtx = dustCanvas.getContext("2d");
+
+let particles = [];
+
+function createDust() {
+  particles = Array.from({ length: 35 }, () => ({
+    x: Math.random() * innerWidth,
+    y: Math.random() * innerHeight,
+    size: Math.random() * 1.5 + .4,
+    speed: Math.random() * .25 + .08,
+    opacity: Math.random() * .5 + .2
+  }));
+}
+
+function drawDust() {
+  dustCtx.clearRect(0, 0, innerWidth, innerHeight);
+
+  particles.forEach(p => {
+    dustCtx.beginPath();
+    dustCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+
+    dustCtx.fillStyle =
+      `rgba(255,180,230,${p.opacity})`;
+
+    dustCtx.fill();
+
+    p.y -= p.speed;
+
+    if (p.y < -5) {
+      p.y = innerHeight + 5;
+      p.x = Math.random() * innerWidth;
+    }
+  });
+
+  if (!reducedMotion) {
+    requestAnimationFrame(drawDust);
+  }
+}
+
+function resize() {
+  resizeCanvas(starsCanvas, starsCtx);
+  resizeCanvas(dustCanvas, dustCtx);
+
+  createStars();
+  createDust();
+
+  if (reducedMotion) {
+    drawStars(0);
+    drawDust();
+  }
+}
+
 resize();
 drawStars();
+drawDust();
 
 window.addEventListener("resize", resize);
 
-/* КОСМИЧЕСКИЕ ПОСЛАНИЯ */
+/* ROMANTIC COMETS */
 
 const messages = [
   "Ты моё самое красивое совпадение ❤️",
@@ -294,7 +401,8 @@ const messages = [
   "Моя любимая звезда 🌙",
   "Расстояние не меняет моих чувств",
   "Ты особенная часть моей вселенной",
-  "Моё сердце всегда находит дорогу к тебе"
+  "Моё сердце всегда находит дорогу к тебе",
+  "В моей вселенной есть только одна ты"
 ];
 
 function createComet() {
@@ -317,22 +425,25 @@ function createComet() {
 
   comet.append(tail, head, message);
 
-  const startX = Math.random() * innerWidth * .5;
+  const startX = Math.random() * innerWidth * .45;
   const startY = Math.random() * innerHeight * .7;
+
+  const dx = innerWidth + 250;
+  const dy = (Math.random() - .5) * innerHeight * .5;
 
   comet.style.left = startX + "px";
   comet.style.top = startY + "px";
 
-  comet.style.setProperty("--dx", (innerWidth + 300) + "px");
+  comet.style.setProperty("--dx", dx + "px");
+  comet.style.setProperty("--dy", dy + "px");
 
-  comet.style.setProperty(
-    "--dy",
-    ((Math.random() - .5) * innerHeight * .5) + "px"
-  );
+  const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+  tail.style.transform = `rotate(${angle + 180}deg)`;
 
   document.getElementById("comets").appendChild(comet);
 
-  setTimeout(() => comet.remove(), 6100);
+  setTimeout(() => comet.remove(), 7100);
 }
 
 if (!reducedMotion) {
@@ -344,6 +455,8 @@ if (!reducedMotion) {
 }
 
 </script>
+
 </body>
-  </html>
+</html>
+
   
