@@ -108,7 +108,71 @@ body {
   }
 }
 
-/* STARS AND DUST */
+
+/* HEART NEBULA STRUCTURE */
+
+.heart-nebula {
+  position: absolute;
+  width: min(85vw, 420px);
+  aspect-ratio: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: .48;
+  filter: blur(15px);
+  pointer-events: none;
+  animation: nebulaPulse 12s ease-in-out infinite alternate;
+}
+
+.heart-nebula::before {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  background:
+    radial-gradient(ellipse at 50% 40%,
+      rgba(255,190,239,.8),
+      rgba(255,70,170,.48) 25%,
+      rgba(153,48,180,.3) 48%,
+      transparent 72%);
+  clip-path: polygon(
+    50% 92%,
+    8% 48%,
+    3% 32%,
+    10% 15%,
+    25% 8%,
+    50% 30%,
+    75% 8%,
+    90% 15%,
+    97% 32%,
+    92% 48%
+  );
+  filter: drop-shadow(0 0 25px #f45bc5);
+}
+
+.heart-nebula::after {
+  content: "";
+  position: absolute;
+  inset: 20%;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse,
+      rgba(255,180,235,.35),
+      rgba(213,75,190,.18) 40%,
+      transparent 72%);
+  filter: blur(22px);
+}
+
+@keyframes nebulaPulse {
+  from {
+    opacity: .28;
+    scale: .94;
+  }
+  to {
+    opacity: .58;
+    scale: 1.07;
+  }
+                    }
+  /* STARS AND DUST */
 
 #stars {
   position: absolute;
